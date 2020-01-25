@@ -8,7 +8,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'da31422afd9b797461f3d5edb8d79ed9f9873249e6b1a553122d2d9af962db017c1ea743c3b7a86e9442be41cc2525ff96071bef994c67c39e7988849ca5d0be'
+  # config.secret_key = '827b19e47e2e6abb0654ec8b95d698cf9bec1a67b963288a463b1eb899336ed74927f260d22e32d14cd09fbf677fb686974f5c4c9f956eff6e7930328b165998'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -70,7 +70,7 @@ Devise.setup do |config|
   # given strategies, for example, `config.http_authenticatable = [:database]` will
   # enable it only for database authentication. The supported strategies are:
   # :database      = Support basic authentication with authentication key + password
-  # config.http_authenticatable = false
+   config.http_authenticatable = true
 
   # If 401 status code should be returned for AJAX requests. True by default.
   # config.http_authenticatable_on_xhr = true
@@ -114,7 +114,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'aff576cccff64718d136919ba879472b51c069652de060e17bc55ff22aa520b559310848243e896d03e8abdcfbcf3e897eb5994d332bd3bdce128c4a30c919c3'
+  # config.pepper = 'eee1211468e45a7b4a9dafa895fdba6d6dd23868530da7624a2c366328ca623ad546dbb98b0bbe61549d84907ae611f10daf5ba3dffede92f0be5f7af330f0cc'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false

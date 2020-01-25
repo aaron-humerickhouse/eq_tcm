@@ -30,6 +30,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'react-rails'
 gem 'devise'
+gem 'jwt'
+gem 'rack-cors'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-material-ui'
