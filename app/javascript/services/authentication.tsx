@@ -1,21 +1,23 @@
-import axios from 'axios';
 import { AxiosPromise } from 'axios';
 import TCMService from './api';
 
 export class AuthenticationService {
-  login = (username, password) => {
-    this.put()
+  http: TCMService;
+
+  constructor() {
+    this.http = new TCMService();
   }
 
-  put(path: string, data?: object): AxiosPromise {
-    return this.http.put(path, data);
-  }
-
-  post(path: string, data?: object): AxiosPromise {
-    return this.http.post(path, data);
-  }
-
-  delete(path: string): AxiosPromise {
-    return this.http.delete(path);
-  }
+  login = (username, password): AxiosPromise => {
+    return this.http.post(
+      '/login.json',
+      {},
+      {
+        auth: {
+          username: username,
+          password: password,
+        },
+      },
+    );
+  };
 }

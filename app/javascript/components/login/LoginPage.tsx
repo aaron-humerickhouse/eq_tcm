@@ -3,26 +3,23 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import { AuthenticationService } from '../../services/authentication';
 
 class LoginPage extends React.Component {
   handleSubmit = event => {
-    const csrfToken = Cookies.get('CSRF-TOKEN');
-    console.log(csrfToken);
-    axios
-      .post('http://localhost:3000/api/v1/login.json', null, {
-        headers: {
-          'X-CSRF-Token': csrfToken,
-        },
-        auth: {
-          username: 'aaron@example.com',
-          password: 'Test1234',
-        },
-      })
-      .then(response => {
-        console.log(response);
-      });
+    new AuthenticationService().login('aaron@example.com', 'Test1234').then(response => {
+      console.log(response);
+    });
+    // axios
+    //   .post('http://localhost:3000/api/v1/login.json', null, {
+    //     headers: {
+    //       'X-CSRF-Token': csrfToken,
+    //     },
+    //     auth: {
+    //       username: 'aaron@example.com',
+    //       password: 'Test1234',
+    //     },
+    //   })
   };
 
   render(): any {
