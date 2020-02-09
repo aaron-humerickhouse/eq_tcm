@@ -1,86 +1,79 @@
-import * as React from "react"
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Button from "@material-ui/core/Button";
-import MenuIcon from "@material-ui/icons/Menu";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import axios from "axios"
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import * as React from 'react';
+import { connect } from 'react-redux';
+
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
 
 interface Props {
-  signedIn: boolean
-  loginPath: string,
-  logoutPath: string
+  signedIn: boolean;
+  loginPath: string;
+  logoutPath: string;
 }
 
 interface State {
-  anchorEl: null | HTMLElement
+  anchorEl: null | HTMLElement;
 }
 
 class HeaderComponent extends React.Component<Props, State> {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      anchorEl: null
-    }
+      anchorEl: null,
+    };
   }
 
   handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    this.setState({anchorEl: event.currentTarget});
-  }
+    this.setState({ anchorEl: event.currentTarget });
+  };
 
   handleClose = () => {
-    this.setState({anchorEl: null});
-  }
+    this.setState({ anchorEl: null });
+  };
 
-  render () {
-    const { signedIn, loginPath, logoutPath } = this.props;
+  render() {
+    const { signedIn } = this.props;
 
     return (
       <React.Fragment>
-        <AppBar position="static">
-          <Toolbar>
-            <div>
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={this.handleClick}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="simple-menu"
-                anchorEl={this.state.anchorEl}
-                keepMounted
-                open={Boolean(this.state.anchorEl)}
-                onClose={this.handleClose}
-              >
-                <MenuItem onClick={this.handleClose}>Item 1</MenuItem>
-                <MenuItem onClick={this.handleClose}>Item 2</MenuItem>
-                <MenuItem onClick={this.handleClose}>Item 3</MenuItem>
-              </Menu>
-            </div>
-            <Typography variant="h6" style={{ flex: 1 }}>
-              EQ - Test Case Manager
-            </Typography>
-            {(signedIn === false) &&
-              <Button color="inherit" variant={"outlined"} href={loginPath}>Login</Button>
-            }
-            {(signedIn === true) &&
-              <Button color="inherit" variant={"outlined"} href={logoutPath}>Logout</Button>
-            }
-          </Toolbar>
-        </AppBar>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed={'top'}>
+          <Navbar.Brand href="/">EQ - Test Case Manager</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              {signedIn ? (
+                <React.Fragment>
+                  <Nav.Link href="/suites">Suites</Nav.Link>
+                  <Nav.Link href="/executions">Executions</Nav.Link>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <Nav.Link href="/features">Features</Nav.Link>
+                  <Nav.Link href="/pricing">Pricing</Nav.Link>
+                  <Nav.Link href="/about_us">About Us</Nav.Link>
+                </React.Fragment>
+              )}
+            </Nav>
+            <hr />
+            <Nav>
+              {signedIn === false && <Nav.Link href={'/login'}>Login</Nav.Link>}
+              {signedIn === true && <Nav.Link href={'/logout'}>Logout</Nav.Link>}
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       </React.Fragment>
     );
   }
 }
 
-export default HeaderComponent;
+function mapStateToProps({ authedUser }): object {
+  return {
+    authedUser: authedUser,
+    signedIn: !!authedUser.user,
+  };
+}
 
+export default connect(mapStateToProps)(HeaderComponent);

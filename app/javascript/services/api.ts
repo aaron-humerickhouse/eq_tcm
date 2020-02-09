@@ -34,7 +34,6 @@ export class TCMService {
     config['headers'] = { ...config['headers'], 'Content-Type': 'application/json' };
     config['headers'] = { ...config['headers'], 'X-CSRF-Token': Cookies.get('CSRF-TOKEN') };
 
-    console.log('config: ', config);
     return config;
   };
 }

@@ -10,7 +10,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
    def create
-     #TODO: Better authentication method
+     #TODO: Better authedUser method
      basic = request.authorization.gsub('Basic ', '')
      auth_params = Base64.decode64(basic).split(':')
      email = auth_params[0]

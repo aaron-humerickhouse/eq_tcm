@@ -25,4 +25,7 @@ Rails.application.routes.draw do
       resource :user, only: [:show, :update]
     end
   end
+
+  get '*unmatched_route', to: 'home#index'
+
 end

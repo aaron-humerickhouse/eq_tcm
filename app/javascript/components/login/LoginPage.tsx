@@ -1,58 +1,59 @@
 import * as React from 'react';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import { AuthenticationService } from '../../services/authentication';
+import { login } from '../../actions/authedUser';
+import { connect } from 'react-redux';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 class LoginPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { email: null, password: null };
+  }
+
   handleSubmit = event => {
-    new AuthenticationService().login('aaron@example.com', 'Test1234').then(response => {
-      console.log(response);
-    });
-    // axios
-    //   .post('http://localhost:3000/api/v1/login.json', null, {
-    //     headers: {
-    //       'X-CSRF-Token': csrfToken,
-    //     },
-    //     auth: {
-    //       username: 'aaron@example.com',
-    //       password: 'Test1234',
-    //     },
-    //   })
+    const { email, password } = this.state;
+    this.props.dispatch(login(email, password));
+    history.push('/');
+  };
+
+  handleEmail = event => {
+    this.setState({ email: event.target.value });
+  };
+
+  handlePassword = event => {
+    this.setState({ password: event.target.value });
   };
 
   render(): any {
+    const { authedUser } = this.props;
+
     return (
       <React.Fragment>
-        <Container>
-          <Paper>
-            <Container>
-              <form noValidate autoComplete="off">
-                <div>
-                  <TextField required id="email-input" label="Email" />
-                </div>
-                <div>
-                  <TextField
-                    required
-                    id="password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                  />
-                </div>
-                <div>
-                  <Button variant={'outlined'} color={'primary'} onClick={this.handleSubmit}>
-                    Login
-                  </Button>
-                </div>
-              </form>
-            </Container>
-          </Paper>
-        </Container>
+        <Form>
+          {!!authedUser.error && <Alert variant={'danger'}>Invalid Email or Password</Alert>}
+          <Form.Group controlId="emailInput">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" placeholder="Email" onChange={this.handleEmail} />
+          </Form.Group>
+          <Form.Group controlId="passwordInput">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" onChange={this.handlePassword} />
+          </Form.Group>
+          <Button variant="primary" type="submit" onClick={this.handleSubmit}>
+            Submit
+          </Button>
+        </Form>
       </React.Fragment>
     );
   }
 }
 
-export default LoginPage;
+function mapStateToProps({ loading, authedUser }): object {
+  return {
+    loading: loading,
+    authedUser: authedUser,
+  };
+}
+
+export default connect(mapStateToProps)(LoginPage);

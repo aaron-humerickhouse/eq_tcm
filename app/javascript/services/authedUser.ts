@@ -1,5 +1,6 @@
 import { AxiosPromise } from 'axios';
 import TCMService from './api';
+import Cookies from 'js-cookie';
 
 export class AuthenticationService {
   http: TCMService;
@@ -19,5 +20,13 @@ export class AuthenticationService {
         },
       },
     );
+  };
+
+  logout = (): AxiosPromise => {
+    return this.http.delete('/logout.json', {
+      headers: {
+        Authorization: `Token ${Cookies.get('eq_jwt')}`,
+      },
+    });
   };
 }

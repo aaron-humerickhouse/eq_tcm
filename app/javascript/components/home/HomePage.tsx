@@ -1,11 +1,10 @@
-import * as React from "react"
-import {Link} from "react-router-dom";
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 
-interface Props {
-}
+interface Props {}
 
 class HomePage extends React.Component<Props> {
-  render () {
+  render() {
     return (
       <React.Fragment>
         <span>HomeContainer</span>
@@ -15,4 +14,4 @@ class HomePage extends React.Component<Props> {
   }
 }
 
-export default HomePage
+export default HomePage;
