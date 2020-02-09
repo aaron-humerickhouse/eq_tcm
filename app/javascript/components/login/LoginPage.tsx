@@ -14,7 +14,6 @@ class LoginPage extends React.Component {
   handleSubmit = event => {
     const { email, password } = this.state;
     this.props.dispatch(login(email, password));
-    history.push('/');
   };
 
   handleEmail = event => {
@@ -25,8 +24,21 @@ class LoginPage extends React.Component {
     this.setState({ password: event.target.value });
   };
 
+  handleEnter = event => {
+    if (event.key === 'Enter') {
+      this.handleSubmit(event);
+    }
+  };
+
   render(): any {
-    const { authedUser } = this.props;
+    const { authedUser, signedIn, history } = this.props;
+    console.log('Props: ', this.props);
+
+    if(signedIn) {
+      history.push({
+        pathname: '/overview';
+      });
+    }
 
     return (
       <React.Fragment>
@@ -38,9 +50,14 @@ class LoginPage extends React.Component {
           </Form.Group>
           <Form.Group controlId="passwordInput">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" onChange={this.handlePassword} />
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              onChange={this.handlePassword}
+              onKeyDown={this.handleEnter}
+            />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={this.handleSubmit}>
+          <Button variant="primary" type="button" onClick={this.handleSubmit}>
             Submit
           </Button>
         </Form>
@@ -53,6 +70,7 @@ function mapStateToProps({ loading, authedUser }): object {
   return {
     loading: loading,
     authedUser: authedUser,
+    signedIn: !!authedUser.user,
   };
 }
 
