@@ -4,39 +4,51 @@ import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import { RouteComponentProps } from 'react-router-dom';
 
-class LoginPage extends React.Component {
+interface Props extends RouteComponentProps {
+  loading: boolean;
+  authedUser: any;
+  signedIn: boolean;
+  dispatch: any;
+}
+
+interface State {
+  email: string;
+  password: string;
+}
+
+class LoginPage extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = { email: null, password: null };
   }
 
-  handleSubmit = event => {
+  handleSubmit = (): void => {
     const { email, password } = this.state;
     this.props.dispatch(login(email, password));
   };
 
-  handleEmail = event => {
+  handleEmail = (event): void => {
     this.setState({ email: event.target.value });
   };
 
-  handlePassword = event => {
+  handlePassword = (event): void => {
     this.setState({ password: event.target.value });
   };
 
-  handleEnter = event => {
+  handleEnter = (event): void => {
     if (event.key === 'Enter') {
-      this.handleSubmit(event);
+      this.handleSubmit();
     }
   };
 
-  render(): any {
+  render(): React.ReactNode {
     const { authedUser, signedIn, history } = this.props;
-    console.log('Props: ', this.props);
 
-    if(signedIn) {
+    if (signedIn) {
       history.push({
-        pathname: '/overview';
+        pathname: '/',
       });
     }
 
