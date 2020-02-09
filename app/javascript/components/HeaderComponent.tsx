@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -11,16 +12,12 @@ interface Props {
   logoutPath: string;
 }
 
-interface State {
-  anchorEl: null | HTMLElement;
-}
-
-class HeaderComponent extends React.Component<Props, State> {
+class HeaderComponent extends React.Component<Props> {
   constructor(props) {
     super(props);
   }
 
-  render() {
+  render(): React.ReactNode {
     const { signedIn } = this.props;
 
     return (
@@ -34,38 +31,57 @@ class HeaderComponent extends React.Component<Props, State> {
             <Nav className="mr-auto">
               {signedIn ? (
                 <React.Fragment>
-                  <Nav.Link as={Link} to="/suites" onSelect={() => {}}>
-                    Suites
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/executions" onSelect={() => {}}>
-                    Executions
-                  </Nav.Link>
+                  <LinkContainer to={'/overview'}>
+                    <Nav.Item>
+                      <Nav.Link href={'/overview'}>Overview</Nav.Link>
+                    </Nav.Item>
+                  </LinkContainer>
+                  <LinkContainer to={'/suites'}>
+                    <Nav.Item>
+                      <Nav.Link href={'/suites'}>Suites</Nav.Link>
+                    </Nav.Item>
+                  </LinkContainer>
+                  <LinkContainer to={'/executions'}>
+                    <Nav.Item>
+                      <Nav.Link href={'/executions'}>Executions</Nav.Link>
+                    </Nav.Item>
+                  </LinkContainer>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  <Nav.Link as={Link} to="/features" onSelect={() => {}}>
-                    Features
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/pricing" onSelect={() => {}}>
-                    Pricing
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/about_us" onSelect={() => {}}>
-                    About Us
-                  </Nav.Link>
+                  <LinkContainer to={'/features'}>
+                    <Nav.Item>
+                      <Nav.Link href={'/features'}>Features</Nav.Link>
+                    </Nav.Item>
+                  </LinkContainer>
+                  <LinkContainer to={'/pricing'}>
+                    <Nav.Item>
+                      <Nav.Link href={'/pricing'}>Pricing</Nav.Link>
+                    </Nav.Item>
+                  </LinkContainer>
+                  <LinkContainer to={'/about_us'}>
+                    <Nav.Item>
+                      <Nav.Link href={'/about_us'}>About Us</Nav.Link>
+                    </Nav.Item>
+                  </LinkContainer>
                 </React.Fragment>
               )}
             </Nav>
             <hr />
             <Nav>
               {signedIn === false && (
-                <Nav.Link as={Link} to={'/login'} onSelect={() => {}}>
-                  Login
-                </Nav.Link>
+                <LinkContainer to={'/login'}>
+                  <Nav.Item>
+                    <Nav.Link href={'/login'}>Login</Nav.Link>
+                  </Nav.Item>
+                </LinkContainer>
               )}
               {signedIn === true && (
-                <Nav.Link as={Link} to={'/logout'} onSelect={() => {}}>
-                  Logout
-                </Nav.Link>
+                <LinkContainer to={'/logout'}>
+                  <Nav.Item>
+                    <Nav.Link href={'/logout'}>Logout</Nav.Link>
+                  </Nav.Item>
+                </LinkContainer>
               )}
             </Nav>
           </Navbar.Collapse>

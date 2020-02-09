@@ -18,7 +18,7 @@ class HomePage extends React.Component<Props> {
     }
   }
 
-  render() {
+  render(): React.ReactNode {
     const { signedIn, authedUser } = this.props;
     return (
       <React.Fragment>
