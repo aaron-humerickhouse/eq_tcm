@@ -22,7 +22,7 @@ class HeaderComponent extends React.Component<Props> {
 
     return (
       <React.Fragment>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed={'top'}>
+        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" fixed={'top'}>
           <Navbar.Brand as={Link} to="/">
             EQ - Test Case Manager
           </Navbar.Brand>
