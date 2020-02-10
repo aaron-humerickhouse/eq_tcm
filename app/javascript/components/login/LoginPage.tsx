@@ -24,6 +24,23 @@ class LoginPage extends React.Component<Props, State> {
     this.state = { email: null, password: null };
   }
 
+  componentDidUpdate(): void {
+    this.redirectIfSignedIn();
+  }
+
+  componentDidMount(): void {
+    this.redirectIfSignedIn();
+  }
+
+  redirectIfSignedIn = (): void => {
+    const { signedIn, history } = this.props;
+    if (signedIn) {
+      history.push({
+        pathname: '/',
+      });
+    }
+  };
+
   handleSubmit = (): void => {
     const { email, password } = this.state;
     this.props.dispatch(login(email, password));
@@ -44,13 +61,7 @@ class LoginPage extends React.Component<Props, State> {
   };
 
   render(): React.ReactNode {
-    const { authedUser, signedIn, history } = this.props;
-
-    if (signedIn) {
-      history.push({
-        pathname: '/',
-      });
-    }
+    const { authedUser } = this.props;
 
     return (
       <React.Fragment>

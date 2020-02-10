@@ -10,7 +10,7 @@ interface Props extends RouteComponentProps {
 }
 
 class HomePage extends React.Component<Props> {
-  UNSAFE_componentWillMount(): void {
+  componentDidMount(): void {
     const { history, route } = this.props;
 
     if (!!route) {
