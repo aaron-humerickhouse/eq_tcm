@@ -9,14 +9,37 @@ import Container from 'react-bootstrap/Container';
 import { ConnectedRouter } from 'connected-react-router';
 import configureStore, { history } from './../configure-store';
 import NotFoundPage from './not-found/NotFoundPage';
+import Cookies from 'js-cookie';
+// import {UserService} from "../services/user";
 
 interface Props {
+  dispatch: any;
 }
 
 class App extends React.Component<Props> {
-  render(): any {
+  // checkForAuth = (): any => {
+  //   const jwtToken = Cookies.get('eq_jwt');
+  //   if (!jwtToken) {
+  //     return;
+  //   }
+  //   const decodedJwt = jwtDecode(jwtToken);
+  //   new UserService()
+  //     .getUser(decodedJwt.id)
+  //     .then(res => {
+  //       return res.data;
+  //     })
+  //     .catch(err => {
+  //       return err.message;
+  //     });
+  //   debugger;
+  // };
+
+  render(): React.ReactChild {
     const store = configureStore({});
 
+    // const store = configureStore({
+    //   authedUser: { user: { id: 1, email: 'aaron@example.com', first_name: 'Aaron', last_name: 'Humerickhouse' } },
+    // });
 
     return (
       <Provider store={store}>

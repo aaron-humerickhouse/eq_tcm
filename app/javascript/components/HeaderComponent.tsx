@@ -5,16 +5,36 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
+import { assignAuthedUser } from '../actions/authedUser';
+import jwtDecode from 'jwt-decode';
+import Cookies from 'js-cookie';
 
 interface Props {
   signedIn: boolean;
   loginPath: string;
   logoutPath: string;
+  dispatch: any;
 }
 
 class HeaderComponent extends React.Component<Props> {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount(): void {
+    const { signedIn } = this.props;
+    if (signedIn === true) {
+      return;
+    }
+    const jwtToken = Cookies.get('eq_jwt');
+
+    // Don't login if there's no JWT
+    if (!jwtToken) {
+      return;
+    }
+    const decodedJwt = jwtDecode(jwtToken);
+
+    this.props.dispatch(assignAuthedUser(decodedJwt.id));
   }
 
   render(): React.ReactNode {
