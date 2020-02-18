@@ -11,6 +11,7 @@ gem 'devise'
 gem 'dry-monads'
 gem 'dry-struct'
 gem 'dry-system-rails'
+gem 'gruf-commander'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 gem 'jwt'
