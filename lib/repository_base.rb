@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 # Base Repository
-class RepositoryBase
-  def initialize(orm_adapter)
-    @orm_adapter = orm_adapter
-  end
-
+module RepositoryBase
   def load_all
     @orm_adapter.find_each.lazy.map(&:map_record)
+  end
+
+  def load(id)
+    map_record(@orm_adapter.find(id))
   end
 end
