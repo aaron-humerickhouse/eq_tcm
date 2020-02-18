@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Application Controller
 class ApplicationController < ActionController::Base
   respond_to :json
 
@@ -9,20 +12,18 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user
-    if request.headers['Authorization']&.include?('Token')
-      authenticate_or_request_with_http_token do |token|
-        begin
-          jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base).first
+    return unless request.headers['Authorization']&.include?('Token')
 
-          @current_user_id = jwt_payload['id']
-        rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
-          head :unauthorized
-        end
-      end
+    authenticate_or_request_with_http_token do |token|
+      jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base).first
+
+      @current_user_id = jwt_payload['id']
+    rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+      head :unauthorized
     end
   end
 
-  def authenticate_user!(options = {})
+  def authenticate_user!(_options = {})
     head :unauthorized unless signed_in?
   end
 

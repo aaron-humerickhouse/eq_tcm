@@ -1,0 +1,51 @@
+AllCops:
+  TargetRubyVersion: 2.7
+  Exclude:
+    - spec/**/*
+    - .bundle/**/*
+    - bin/**/*
+    - vendor/**/*
+    - tmp/**/*
+    - log/**/*
+    - Rakefile
+    - node_modules/**/*
+    - db/migrate/**/*
+    -
+
+Layout/EndAlignment:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 147
+
+Metrics/ClassLength:
+  Max: 406
+
+Metrics/CyclomaticComplexity:
+  Max: 12
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 88
+
+Metrics/ModuleLength:
+  Max: 1000
+
+Metrics/ParameterLists:
+  Max: 9
+
+Metrics/PerceivedComplexity:
+  Max: 12
+
+Naming/PredicateName:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+# Rubocop is opinionated here, which makes compositional base classes/interfaces with keyword arguments problematic.
+# Disabling this allows base class stub methods to have keyword args.
+Lint/UnusedMethodArgument:
+  AllowUnusedKeywordArguments: true

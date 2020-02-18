@@ -65,7 +65,7 @@ export const logout = (): ((dispatch) => void) => {
     new AuthenticationService()
       .logout()
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .then(res => {
+      .then(_ => {
         Cookies.remove('eq_jwt');
         dispatch(logoutSuccess());
       })
