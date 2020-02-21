@@ -2,7 +2,7 @@
 
 module Eq
   module Users
-    # Eq::Tcm::UserEntity
+    # Eq::Users::UserEntity
     class UserEntity < EntityBase
       attribute :id, Types::Integer.optional
       attribute :email, Types::Strict::String
@@ -13,10 +13,6 @@ module Eq
       attribute :remember_created_at, Types::Time.optional
       attribute :created_at, Types::Time.optional
       attribute :updated_at, Types::Time.optional
-
-      def persisted?
-        !id.nil?
-      end
     end
   end
 end

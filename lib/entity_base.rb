@@ -19,6 +19,10 @@ class EntityBase < Dry::Struct
     end
   end
 
+  def persisted?
+    !id.nil?
+  end
+
   private
 
   def serialize(object, type)

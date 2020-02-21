@@ -15,15 +15,15 @@ module Eq
 
       def map_record(record)
         ::Eq::Users::UserEntity.new(
-          id:                     record.id,
-          email:                  record.email,
-          first_name:             record.first_name,
-          last_name:              record.last_name,
-          reset_password_token:   record.reset_password_token,
+          id: record.id,
+          email: record.email,
+          first_name: record.first_name,
+          last_name: record.last_name,
+          reset_password_token: record.reset_password_token,
           reset_password_sent_at: record.reset_password_sent_at,
-          remember_created_at:    record.remember_created_at,
-          created_at:             record.created_at,
-          updated_at:             record.updated_at,
+          remember_created_at: record.remember_created_at,
+          created_at: record.created_at,
+          updated_at: record.updated_at
         )
       end
     end
