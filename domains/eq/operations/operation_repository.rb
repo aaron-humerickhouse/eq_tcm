@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 module Eq
-  module Companies
-    # Eq::Companies::CompanyRepository
-    class CompanyRepository < RepositoryBase
+  module Operations
+    # Eq::Operations::OperationRepository
+    class OperationRepository < RepositoryBase
 
       private
 
       def orm_adapter
-        ::Company
+        ::Operation
       end
 
       def map_record(record)
-        ::Eq::Companies::CompanyEntity.new(
+        ::Eq::Operations::OperationEntity.new(
           id: record.id,
           name: record.name,
           description: record.description,

@@ -1,6 +1,43 @@
 import { AuthenticationService } from '../services/authedUser';
 import { UserService } from '../services/user';
 import Cookies from 'js-cookie';
+import { PermissionService } from '../services/permission';
+
+export const GET_PERMISSIONS_STARTED = 'GET_PERMISSIONS_STARTED';
+export const GET_PERMISSIONS_SUCCESS = 'GET_PERMISSIONS_SUCCESS';
+export const GET_PERMISSIONS_FAILURE = 'GET_PERMISSIONS_FAILURE';
+
+const getPermissionsStarted = (): {} => ({
+  type: GET_PERMISSIONS_STARTED,
+});
+
+const getPermissionsSuccess = (permissionsData): {} => ({
+  type: GET_PERMISSIONS_SUCCESS,
+  payload: {
+    ...permissionsData,
+  },
+});
+
+export const getPermissionsFailure = (errorMessage): {} => ({
+  type: GET_PERMISSIONS_FAILURE,
+  payload: {
+    errorMessage,
+  },
+});
+
+const getPermissions = (userId): ((dispatch) => void) => {
+  return (dispatch): void => {
+    dispatch(getPermissionsStarted());
+    new PermissionService()
+      .getPermissions(userId)
+      .then(res => {
+        dispatch(getPermissionsSuccess(res.data));
+      })
+      .catch(err => {
+        dispatch(getPermissionsFailure(err.message));
+      });
+  };
+};
 
 export const LOGIN_STARTED = 'LOGIN_STARTED';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -32,6 +69,7 @@ export const login = (username, password): ((dispatch) => void) => {
       .login(username, password)
       .then(res => {
         dispatch(loginSuccess(res.data));
+        dispatch(getPermissions(res.data.user.id));
       })
       .catch(err => {
         dispatch(loginFailure(err.message));
@@ -105,6 +143,7 @@ export const assignAuthedUser = (userId): ((dispatch) => void) => {
       .getUser(userId)
       .then(res => {
         dispatch(assignAuthedUserSuccess(res.data));
+        dispatch(getPermissions(userId));
       })
       .catch(err => {
         dispatch(assignAuthedUserFailure(err.message));

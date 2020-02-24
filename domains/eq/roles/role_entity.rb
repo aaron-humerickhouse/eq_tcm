@@ -2,7 +2,7 @@
 
 module Eq
   module Roles
-    # Eq::Roles::CompanyEntity
+    # Eq::Roles::RoleEntity
     class RoleEntity < EntityBase
       attribute :id, Types::Integer.optional
       attribute :name, Types::Strict::String

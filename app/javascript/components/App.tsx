@@ -17,29 +17,8 @@ interface Props {
 }
 
 class App extends React.Component<Props> {
-  // checkForAuth = (): any => {
-  //   const jwtToken = Cookies.get('eq_jwt');
-  //   if (!jwtToken) {
-  //     return;
-  //   }
-  //   const decodedJwt = jwtDecode(jwtToken);
-  //   new UserService()
-  //     .getUser(decodedJwt.id)
-  //     .then(res => {
-  //       return res.data;
-  //     })
-  //     .catch(err => {
-  //       return err.message;
-  //     });
-  //   debugger;
-  // };
-
   render(): React.ReactChild {
     const store = configureStore({});
-
-    // const store = configureStore({
-    //   authedUser: { user: { id: 1, email: 'aaron@example.com', first_name: 'Aaron', last_name: 'Humerickhouse' } },
-    // });
 
     return (
       <Provider store={store}>

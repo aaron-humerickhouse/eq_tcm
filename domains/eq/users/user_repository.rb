@@ -3,28 +3,24 @@
 module Eq
   module Users
     # Eq::Users::UserRepository
-    class UserRepository
-      include RepositoryBase
-      @orm_adapter = ::User
+    class UserRepository < RepositoryBase
 
       def load_by_email(email)
-        map_record(@orm_adapter.find_by_email(email))
+        map_record(orm_adapter.find_by(email: email))
       end
 
       private
 
+      def orm_adapter
+        ::User
+      end
+
       def map_record(record)
-        ::Eq::Users::UserEntity.new(
-          id: record.id,
-          email: record.email,
-          first_name: record.first_name,
-          last_name: record.last_name,
-          reset_password_token: record.reset_password_token,
-          reset_password_sent_at: record.reset_password_sent_at,
-          remember_created_at: record.remember_created_at,
-          created_at: record.created_at,
-          updated_at: record.updated_at
-        )
+        user_entity_factory.build(record)
+      end
+
+      def user_entity_factory
+        @user_entity_factory ||= EqTcm::Container['eq.users.user_entity_factory']
       end
     end
   end

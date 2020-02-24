@@ -1,3 +1,5 @@
-module EqTcm
-  Import = Container.injector
-end
+# # frozen_string_literal: true
+#
+# module EqTcm
+#   IMPORT = Container.injector
+# end

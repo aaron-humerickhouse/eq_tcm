@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_20_034111) do
+ActiveRecord::Schema.define(version: 2020_02_24_040020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,36 @@ ActiveRecord::Schema.define(version: 2020_02_20_034111) do
     t.string "logo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "operation_roles", force: :cascade do |t|
+    t.bigint "operation_id", null: false
+    t.bigint "role_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["operation_id"], name: "index_operation_roles_on_operation_id"
+    t.index ["role_id"], name: "index_operation_roles_on_role_id"
+  end
+
+  create_table "operations", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "role_assignments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "target_type", null: false
+    t.bigint "target_id", null: false
+    t.bigint "role_id", null: false
+    t.integer "assigner_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["assigner_id"], name: "index_role_assignments_on_assigner_id"
+    t.index ["role_id"], name: "index_role_assignments_on_role_id"
+    t.index ["target_type", "target_id"], name: "index_role_assignments_on_target_type_and_target_id"
+    t.index ["user_id"], name: "index_role_assignments_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -43,4 +73,8 @@ ActiveRecord::Schema.define(version: 2020_02_20_034111) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "operation_roles", "operations"
+  add_foreign_key "operation_roles", "roles"
+  add_foreign_key "role_assignments", "roles"
+  add_foreign_key "role_assignments", "users"
 end
