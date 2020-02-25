@@ -8,20 +8,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-super_admin_user = FactoryBot.create(:user, email: 'aaron@example.com', first_name: 'Aaron', last_name: 'Humerickhouse')
+super_admin_user = FactoryBot.create(:user, :super_admin, email: 'aaron@example.com', first_name: 'Aaron', last_name: 'Humerickhouse')
 acme_admin_user = FactoryBot.create(:user, email: 'super@acme.com', first_name: 'Acme', last_name: 'Admin')
-widget_admin_user = FactoryBot.create(:user, email: 'super@widget.com', first_name: 'Super', last_name: 'Admin')
+widget_admin_user = FactoryBot.create(:user, email: 'super@widget.com', first_name: 'Widget', last_name: 'Admin')
+both_admin_user = FactoryBot.create(:user, email: 'super@both.com', first_name: 'Both', last_name: 'Admin')
 
 acme_company = FactoryBot.create(:company, name: 'Acme')
 widget_company = FactoryBot.create(:company, name: 'Widget')
 
 # Roles
-super_admin = FactoryBot.create(
-  :role,
-  name: 'Super Administrator',
-  description: 'All controls.'
-)
-
 company_admin = FactoryBot.create(
   :role,
   name: 'Company Administrator',
@@ -104,26 +99,6 @@ remove_role = FactoryBot.create(
 )
 
 # Permissions
-# # super_admin
-FactoryBot.create(:operation_role,
-                  role: super_admin,
-                  operation: add_company)
-FactoryBot.create(:operation_role,
-                  role: super_admin,
-                  operation: edit_company)
-FactoryBot.create(:operation_role,
-                  role: super_admin,
-                  operation: read_company)
-FactoryBot.create(:operation_role,
-                  role: super_admin,
-                  operation: delete_company)
-FactoryBot.create(:operation_role,
-                  role: super_admin,
-                  operation: assign_role)
-FactoryBot.create(:operation_role,
-                  role: super_admin,
-                  operation: remove_role)
-
 # # company_admin
 FactoryBot.create(:operation_role,
                   role: company_admin,
@@ -146,12 +121,6 @@ FactoryBot.create(:operation_role,
 
 # Assignments
 FactoryBot.create(:role_assignment,
-                  user: super_admin_user,
-                  target: acme_company,
-                  role: super_admin,
-                  assigner: super_admin_user)
-
-FactoryBot.create(:role_assignment,
                   user: acme_admin_user,
                   target: acme_company,
                   role: company_admin,
@@ -159,6 +128,18 @@ FactoryBot.create(:role_assignment,
 
 FactoryBot.create(:role_assignment,
                   user: widget_admin_user,
+                  target: widget_company,
+                  role: company_admin,
+                  assigner: super_admin_user)
+
+FactoryBot.create(:role_assignment,
+                  user: both_admin_user,
+                  target: acme_company,
+                  role: company_admin,
+                  assigner: super_admin_user)
+
+FactoryBot.create(:role_assignment,
+                  user: both_admin_user,
                   target: widget_company,
                   role: company_admin,
                   assigner: super_admin_user)

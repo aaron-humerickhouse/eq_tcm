@@ -7,7 +7,7 @@ import {
   LOGOUT_SUCCESS,
   ASSIGN_AUTHED_USER_STARTED,
   ASSIGN_AUTHED_USER_SUCCESS,
-  ASSIGN_AUTHED_USER_FAILURE,
+  ASSIGN_AUTHED_USER_FAILURE, GET_PERMISSIONS_STARTED, GET_PERMISSIONS_SUCCESS, GET_PERMISSIONS_FAILURE,
 } from '../actions/authedUser';
 
 export default function authedUser(state = {}, action): {} {
@@ -29,6 +29,12 @@ export default function authedUser(state = {}, action): {} {
     case ASSIGN_AUTHED_USER_SUCCESS:
       return { ...state, ...action.payload, loading: false, error: null };
     case ASSIGN_AUTHED_USER_FAILURE:
+      return { ...state, loading: false, error: action.payload.errorMessage };
+    case GET_PERMISSIONS_STARTED:
+      return { ...state, loading: true };
+    case GET_PERMISSIONS_SUCCESS:
+      return { ...state, permissions: action.payload, loading: false, error: null };
+    case GET_PERMISSIONS_FAILURE:
       return { ...state, loading: false, error: action.payload.errorMessage };
     default:
       return state;
