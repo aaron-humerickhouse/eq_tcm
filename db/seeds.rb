@@ -16,6 +16,9 @@ both_admin_user = FactoryBot.create(:user, email: 'super@both.com', first_name: 
 acme_company = FactoryBot.create(:company, name: 'Acme')
 widget_company = FactoryBot.create(:company, name: 'Widget')
 
+acme_project = FactoryBot.create(:project, name: 'ACME Project', company: acme_company)
+widget_project = FactoryBot.create(:project, name: 'Widget Project', company: widget_company)
+
 # Roles
 company_admin = FactoryBot.create(
   :role,
@@ -98,20 +101,40 @@ remove_role = FactoryBot.create(
   description: 'Remove a role assignment.'
 )
 
+create_project = FactoryBot.create(
+  :operation,
+  name: 'Add Project',
+  description: 'Add a Project.'
+)
+edit_project = FactoryBot.create(
+  :operation,
+  name: 'Edit Project',
+  description: 'Edit a Project.'
+)
+delete_project = FactoryBot.create(
+  :operation,
+  name: 'Delete Project',
+  description: 'Delete a Project.'
+)
+read_project = FactoryBot.create(
+  :operation,
+  name: 'Read Project',
+  description: 'Read Projects.'
+)
+
 # Permissions
 # # company_admin
-FactoryBot.create(:operation_role,
-                  role: company_admin,
-                  operation: read_company)
-FactoryBot.create(:operation_role,
-                  role: company_admin,
-                  operation: edit_company)
-FactoryBot.create(:operation_role,
-                  role: company_admin,
-                  operation: assign_role)
-FactoryBot.create(:operation_role,
-                  role: company_admin,
-                  operation: remove_role)
+admin_operations = [
+  read_company, edit_company,
+  assign_role, remove_role, create_project,
+  edit_project, delete_project, read_project
+]
+
+admin_operations.each do |operation|
+  FactoryBot.create(:operation_role,
+                    role: company_admin,
+                    operation: operation)
+end
 
 # # project_admin
 # # test_writer
