@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ProjectsComponent from './ProjectsComponent';
 
 interface Props extends RouteComponentProps {
   route: string;
@@ -20,6 +21,7 @@ class HomePage extends React.Component<Props> {
 
   render(): React.ReactNode {
     const { signedIn, authedUser } = this.props;
+
     return (
       <React.Fragment>
         <span>HomeContainer </span>
@@ -39,6 +41,7 @@ class HomePage extends React.Component<Props> {
           <div className="p-2 mb-2 bg-dark text-white">.bg-dark</div>
           <div className="p-2 mb-2 bg-white text-gray-dark">.bg-white</div>
         </div>
+        <ProjectsComponent />
       </React.Fragment>
     );
   }
