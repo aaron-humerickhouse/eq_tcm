@@ -6,8 +6,9 @@ module Eq
     class PermissionEntityFactory
       def build(hash)
         PermissionEntity.new(
-          target: hash[:target],
-          operations: hash[:operations]
+          target_id: hash[:target_id],
+          target_type: hash[:target_type],
+          operation: hash[:operation]
         )
       end
     end

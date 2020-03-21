@@ -3,6 +3,7 @@ class PermissionsController < ApplicationController
 
   def index
     user_id = params[:user_id]
-    @permissions = yield Eq::Permissions::PermissionService.new.user_permissions(user_id)
+    binding.pry
+    @permissions = yield permission_service.user_permissions(user_id)
   end
 end

@@ -60,4 +60,8 @@ class RepositoryBase
       map_record(record)
     end
   end
+
+  def logger
+    @logger ||= EqTcm::Container['logger']
+  end
 end

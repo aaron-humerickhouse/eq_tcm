@@ -2,6 +2,8 @@
 
 # Application Controller
 class ApplicationController < ActionController::Base
+  include Pundit
+
   respond_to :json
 
   protect_from_forgery with: :null_session
@@ -37,5 +39,9 @@ class ApplicationController < ActionController::Base
 
   def set_csrf_cookie
     cookies['CSRF-TOKEN'] = form_authenticity_token
+  end
+
+  def permission_service
+    @permission_service ||= EqTcm::Container['eq.permissions.permission_service']
   end
 end

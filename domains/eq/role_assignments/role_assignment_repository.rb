@@ -4,7 +4,7 @@ module Eq
   module RoleAssignments
     # Eq::RoleAssignments::RoleAssignmentRepository
     class RoleAssignmentRepository < RepositoryBase
-      def load_all_by_user(user)
+      def jload_all_by_user(user)
         load_all_by_user_id(user.id)
       end
 

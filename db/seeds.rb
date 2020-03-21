@@ -7,11 +7,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts 'Starting Seeding'
 
 super_admin_user = FactoryBot.create(:user, :super_admin, email: 'aaron@example.com', first_name: 'Aaron', last_name: 'Humerickhouse')
-acme_admin_user = FactoryBot.create(:user, email: 'super@acme.com', first_name: 'Acme', last_name: 'Admin')
-widget_admin_user = FactoryBot.create(:user, email: 'super@widget.com', first_name: 'Widget', last_name: 'Admin')
-both_admin_user = FactoryBot.create(:user, email: 'super@both.com', first_name: 'Both', last_name: 'Admin')
+acme_admin_user = FactoryBot.create(:user, email: 'admin@acme.com', first_name: 'Acme', last_name: 'Admin')
+widget_admin_user = FactoryBot.create(:user, email: 'admin@widget.com', first_name: 'Widget', last_name: 'Admin')
+both_admin_user = FactoryBot.create(:user, email: 'admin@both.com', first_name: 'Both', last_name: 'Admin')
 
 acme_company = FactoryBot.create(:company, name: 'Acme')
 widget_company = FactoryBot.create(:company, name: 'Widget')
@@ -61,65 +62,76 @@ member = FactoryBot.create(
 add_company = FactoryBot.create(
   :operation,
   name: 'Add Company',
-  description: 'Add a company'
+  description: 'Add a company',
+  slug: 'create_company'
 )
 
 edit_company = FactoryBot.create(
   :operation,
   name: 'Edit Company',
-  description: 'Edit a company'
+  description: 'Edit a company',
+  slug: 'update_company'
 )
 
 read_company = FactoryBot.create(
   :operation,
   name: 'Read Company',
-  description: "Read a company's details"
+  description: "Read a company's details",
+  slug: 'show_company'
 )
 
 delete_company = FactoryBot.create(
   :operation,
   name: 'Delete Company',
-  description: 'Delete a company'
+  description: 'Delete a company',
+  slug: 'destroy_company'
 )
 
 # Permissions
 assign_role = FactoryBot.create(
   :operation,
   name: 'Assign Role',
-  description: 'Assign a role.'
+  description: 'Assign a role.',
+  slug: 'assign_role'
 )
 
 read_role = FactoryBot.create(
   :operation,
   name: 'Read Roles',
-  description: 'Read roles.'
+  description: 'Read roles.',
+  slug: 'show_role'
 )
 
 remove_role = FactoryBot.create(
   :operation,
   name: 'Remove Role',
-  description: 'Remove a role assignment.'
+  description: 'Remove a role assignment.',
+  slug: 'remove_role'
 )
 
 create_project = FactoryBot.create(
   :operation,
   name: 'Add Project',
-  description: 'Add a Project.'
+  description: 'Add a Project.',
+  slug: 'create_project'
 )
 edit_project = FactoryBot.create(
   :operation,
   name: 'Edit Project',
-  description: 'Edit a Project.'
+  description: 'Edit a Project.',
+  slug: 'update_project'
 )
 delete_project = FactoryBot.create(
   :operation,
   name: 'Delete Project',
-  description: 'Delete a Project.'
+  description: 'Delete a Project.',
+  slug: 'destroy_project'
 )
 read_project = FactoryBot.create(
   :operation,
   name: 'Read Project',
-  description: 'Read Projects.'
+  description: 'Read Projects.',
+  slug: 'show_project'
 )
 
 # Permissions
@@ -166,3 +178,5 @@ FactoryBot.create(:role_assignment,
                   target: widget_company,
                   role: company_admin,
                   assigner: super_admin_user)
+
+puts 'Finished Seeding'

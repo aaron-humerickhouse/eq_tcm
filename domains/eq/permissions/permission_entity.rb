@@ -4,8 +4,9 @@ module Eq
   module Permissions
     # Eq::Permissions::PermissionEntity
     class PermissionEntity < EntityBase
-      attribute :target, Types::Instance(Eq::Companies::CompanyEntity)
-      attribute :operations, Types::Strict::Array.of(Types.Instance(Eq::Operations::OperationEntity))
+      attribute :target_id, Types::Strict::Integer
+      attribute :target_type, Types::Strict::String
+      attribute :operation, Types::Strict::String
     end
   end
 end
