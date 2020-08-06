@@ -63,28 +63,28 @@ add_company = FactoryBot.create(
   :operation,
   name: 'Add Company',
   description: 'Add a company',
-  slug: Operations::Company::CREATE
+  slug: Eq::Operations::Company::CREATE
 )
 
 update_company = FactoryBot.create(
   :operation,
   name: 'Edit Company',
   description: 'Edit a company',
-  slug: Operations::Company::UPDATE
+  slug: Eq::Operations::Company::UPDATE
 )
 
 read_company = FactoryBot.create(
   :operation,
   name: 'Read Company',
   description: "Read a company's details",
-  slug: Operations::Company::READ
+  slug: Eq::Operations::Company::READ
 )
 
 delete_company = FactoryBot.create(
   :operation,
   name: 'Delete Company',
   description: 'Delete a company',
-  slug: Operations::Company::DESTROY
+  slug: Eq::Operations::Company::DESTROY
 )
 
 # Permissions
@@ -92,46 +92,46 @@ assign_role = FactoryBot.create(
   :operation,
   name: 'Assign Role',
   description: 'Assign a role.',
-  slug: Operations::Role::ASSIGN
+  slug: Eq::Operations::Role::ASSIGN
 )
 
 read_role = FactoryBot.create(
   :operation,
   name: 'Read Roles',
   description: 'Read roles.',
-  slug: Operations::Role::READ
+  slug: Eq::Operations::Role::READ
 )
 
 remove_role = FactoryBot.create(
   :operation,
   name: 'Remove Role',
   description: 'Remove a role assignment.',
-  slug: Operations::Role::REMOVE
+  slug: Eq::Operations::Role::REMOVE
 )
 
 create_project = FactoryBot.create(
   :operation,
   name: 'Add Project',
   description: 'Add a Project.',
-  slug: Operations::Project::CREATE
+  slug: Eq::Operations::Project::CREATE
 )
 update_project = FactoryBot.create(
   :operation,
   name: 'Edit Project',
   description: 'Edit a Project.',
-  slug: Operations::Project::UPDATE
+  slug: Eq::Operations::Project::UPDATE
 )
 delete_project = FactoryBot.create(
   :operation,
   name: 'Delete Project',
   description: 'Delete a Project.',
-  slug: Operations::Project::DESTROY
+  slug: Eq::Operations::Project::DESTROY
 )
 read_project = FactoryBot.create(
   :operation,
   name: 'Read Project',
   description: 'Read Projects.',
-  slug: Operations::Project::READ
+  slug: Eq::Operations::Project::READ
 )
 
 # Permissions

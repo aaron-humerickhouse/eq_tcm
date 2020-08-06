@@ -39,7 +39,7 @@ class ProjectPolicy
     def resolve
       projects = []
       permissions = yield Eq::Permissions::PermissionService.new.user_permissions(user.id)
-      read_projects = permissions.select { |permission| permission[:operation].include?(Operations::Project::READ) }
+      read_projects = permissions.select { |permission| permission[:operation].include?(Eq::Operations::Project::READ) }
       read_projects.each do |permission|
         projects << permission[:target_type].constantize.find(permission[:target_id]).projects
       end
