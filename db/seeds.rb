@@ -63,28 +63,28 @@ add_company = FactoryBot.create(
   :operation,
   name: 'Add Company',
   description: 'Add a company',
-  slug: 'create_company'
+  slug: Operations::Company::CREATE
 )
 
-edit_company = FactoryBot.create(
+update_company = FactoryBot.create(
   :operation,
   name: 'Edit Company',
   description: 'Edit a company',
-  slug: 'update_company'
+  slug: Operations::Company::UPDATE
 )
 
 read_company = FactoryBot.create(
   :operation,
   name: 'Read Company',
   description: "Read a company's details",
-  slug: 'show_company'
+  slug: Operations::Company::READ
 )
 
 delete_company = FactoryBot.create(
   :operation,
   name: 'Delete Company',
   description: 'Delete a company',
-  slug: 'destroy_company'
+  slug: Operations::Company::DESTROY
 )
 
 # Permissions
@@ -92,54 +92,54 @@ assign_role = FactoryBot.create(
   :operation,
   name: 'Assign Role',
   description: 'Assign a role.',
-  slug: 'assign_role'
+  slug: Operations::Role::ASSIGN
 )
 
 read_role = FactoryBot.create(
   :operation,
   name: 'Read Roles',
   description: 'Read roles.',
-  slug: 'show_role'
+  slug: Operations::Role::READ
 )
 
 remove_role = FactoryBot.create(
   :operation,
   name: 'Remove Role',
   description: 'Remove a role assignment.',
-  slug: 'remove_role'
+  slug: Operations::Role::REMOVE
 )
 
 create_project = FactoryBot.create(
   :operation,
   name: 'Add Project',
   description: 'Add a Project.',
-  slug: 'create_project'
+  slug: Operations::Project::CREATE
 )
-edit_project = FactoryBot.create(
+update_project = FactoryBot.create(
   :operation,
   name: 'Edit Project',
   description: 'Edit a Project.',
-  slug: 'update_project'
+  slug: Operations::Project::UPDATE
 )
 delete_project = FactoryBot.create(
   :operation,
   name: 'Delete Project',
   description: 'Delete a Project.',
-  slug: 'destroy_project'
+  slug: Operations::Project::DESTROY
 )
 read_project = FactoryBot.create(
   :operation,
   name: 'Read Project',
   description: 'Read Projects.',
-  slug: 'show_project'
+  slug: Operations::Project::READ
 )
 
 # Permissions
 # # company_admin
 admin_operations = [
-  read_company, edit_company,
+  read_company, update_company,
   assign_role, remove_role, create_project,
-  edit_project, delete_project, read_project
+  update_project, delete_project, read_project
 ]
 
 admin_operations.each do |operation|

@@ -3,6 +3,6 @@ FactoryBot.define do
     name { Faker::Games::ElderScrolls.race }
     description { Faker::Games::SonicTheHedgehog.zone }
 
-    after(:build) { |operation| operation.slug = operation.name.parameterize.underscore }
+    after(:build) { |operation| operation.slug = operation.name.parameterize.underscore unless operation.slug }
   end
 end
