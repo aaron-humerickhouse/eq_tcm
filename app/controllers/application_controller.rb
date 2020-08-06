@@ -8,8 +8,11 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :null_session
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   before_action :authenticate_user
   before_action :set_csrf_cookie
+  # after_action :verify_authorized
 
   private
 
@@ -43,5 +46,9 @@ class ApplicationController < ActionController::Base
 
   def permission_service
     @permission_service ||= EqTcm::Container['eq.permissions.permission_service']
+  end
+
+  def user_not_authorized
+    render json: {}, status: :forbidden
   end
 end

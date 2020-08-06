@@ -16,4 +16,12 @@ export class ProjectService {
       },
     });
   };
+
+  getProject = (id: number): AxiosPromise => {
+    return this.http.get(`/projects/${id}.json`, {
+      headers: {
+        Authorization: `Token ${Cookies.get('eq_jwt')}`,
+      },
+    });
+  };
 }

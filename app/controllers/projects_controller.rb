@@ -11,7 +11,9 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1.json
-  def show; end
+  def show
+    authorize @project
+  end
 
 
   # POST /projects.json

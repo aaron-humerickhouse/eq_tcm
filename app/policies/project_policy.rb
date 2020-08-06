@@ -5,6 +5,8 @@ class ProjectPolicy
   def initialize(user, record)
     @user = user
     @record = record
+
+    @permissions = Eq::Permissions::PermissionService.new.user_permissions(user.id).value_or([])
   end
 
   def index?
@@ -12,7 +14,13 @@ class ProjectPolicy
   end
 
   def show?
-    false
+    projects = []
+    read_projects = @permissions.select { |permission| permission[:operation].include?(Eq::Operations::Project::READ) }
+    read_projects.each do |permission|
+      projects << permission[:target_type].constantize.find(permission[:target_id]).projects
+    end
+
+    projects.flatten.map(&:id).include?(@record.id)
   end
 
   def create?
@@ -34,12 +42,13 @@ class ProjectPolicy
     def initialize(user, scope)
       @user = user
       @scope = scope
+
+      @permissions = Eq::Permissions::PermissionService.new.user_permissions(user.id).value_or([])
     end
 
     def resolve
       projects = []
-      permissions = yield Eq::Permissions::PermissionService.new.user_permissions(user.id)
-      read_projects = permissions.select { |permission| permission[:operation].include?(Eq::Operations::Project::READ) }
+      read_projects = @permissions.select { |permission| permission[:operation].include?(Eq::Operations::Project::READ) }
       read_projects.each do |permission|
         projects << permission[:target_type].constantize.find(permission[:target_id]).projects
       end

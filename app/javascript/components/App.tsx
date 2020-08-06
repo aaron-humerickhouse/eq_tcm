@@ -10,6 +10,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import configureStore, { history } from './../configure-store';
 import NotFoundPage from './not-found/NotFoundPage';
 import Cookies from 'js-cookie';
+import ProjectPage from "./projects/ProjectPage";
 // import {UserService} from "../services/user";
 
 interface Props {
@@ -30,6 +31,7 @@ class App extends React.Component<Props> {
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/login" component={LoginPage} />
                 <Route exact path="/logout" component={LogoutPage} />
+                <Route exact path="/projects/:id" component={ProjectPage} />
                 <Route exact path="/404" component={NotFoundPage} />
                 <Redirect from="*" to="/404" />
               </Switch>
