@@ -1,5 +1,6 @@
 import { AxiosPromise } from 'axios';
 import TCMService from './api';
+import Cookies from 'js-cookie';
 
 export class ProjectService {
   http: TCMService;
@@ -9,6 +10,10 @@ export class ProjectService {
   }
 
   getProjects = (): AxiosPromise => {
-    return this.http.get(`/projects.json`, {});
+    return this.http.get(`/projects.json`, {
+      headers: {
+        Authorization: `Token ${Cookies.get('eq_jwt')}`,
+      },
+    });
   };
 }

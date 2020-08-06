@@ -1,5 +1,6 @@
 import { AxiosPromise } from 'axios';
 import TCMService from './api';
+import Cookies from 'js-cookie';
 
 export class PermissionService {
   http: TCMService;
@@ -9,6 +10,10 @@ export class PermissionService {
   }
 
   getPermissions = (userId): AxiosPromise => {
-    return this.http.get(`/users/${userId}/permissions.json`, {});
+    return this.http.get(`/users/${userId}/permissions.json`, {
+      headers: {
+        Authorization: `Token ${Cookies.get('eq_jwt')}`,
+      },
+    });
   };
 }

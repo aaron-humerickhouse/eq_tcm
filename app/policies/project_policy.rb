@@ -1,4 +1,5 @@
 class ProjectPolicy
+  include Dry::Monads[:do, :result]
   attr_reader :user, :record
 
   def initialize(user, record)
@@ -27,6 +28,7 @@ class ProjectPolicy
   end
 
   class Scope
+    include Dry::Monads[:do, :result]
     attr_reader :user, :scope
 
     def initialize(user, scope)
@@ -35,7 +37,14 @@ class ProjectPolicy
     end
 
     def resolve
-      scope.all
+      projects = []
+      permissions = yield Eq::Permissions::PermissionService.new.user_permissions(user.id)
+
+      read_projects = permissions.select { |permission| permission[:operation].include?('read_project') }
+      read_projects.each do |permission|
+        projects << permission[:target_type].constantize.find(permission[:target_id]).projects
+      end
+      projects.flatten
     end
   end
 end
