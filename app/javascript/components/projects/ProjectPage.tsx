@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { getProject } from '../../actions/project';
-import { RouteComponentProps } from 'react-router-dom';
-import { CircularProgress } from '@material-ui/core';
+import { Redirect, RouteComponentProps } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
 
 interface Props extends RouteComponentProps {
   loading: boolean;
@@ -19,7 +19,6 @@ class ProjectPage extends React.Component<Props> {
   }
 
   render(): React.ReactNode {
-    // eslint-disable-next-line react/prop-types
     const { project, error, loading, match } = this.props;
 
     return (
@@ -27,12 +26,10 @@ class ProjectPage extends React.Component<Props> {
         <h2>Project Page</h2>
         <span>Param id: {match.params.id}</span>
         <br />
-        {loading && <CircularProgress />}
-        {!loading && typeof error !== 'undefined' && <span>{error}</span>}
+        {loading && <Spinner animation="grow" role="status" variant="primary" />}
+        {!loading && typeof error !== 'undefined' && error !== null && <Redirect to="/404" />}
         {!loading && typeof project !== 'undefined' && (
           <React.Fragment>
-            <span>Project Page</span>
-            <br />
             <span>Project Id: {project.id}</span>
             <br />
             <span>Project Name: {project.name}</span>
