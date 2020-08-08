@@ -28,6 +28,10 @@ Rails.application.routes.draw do
         resources :permissions, only: :index
       end
 
+      resources :companies do
+        resources :projects
+      end
+
       resources :projects
     end
   end
