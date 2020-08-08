@@ -26,7 +26,12 @@ class HomePage extends React.Component<Props> {
       <React.Fragment>
         <span>HomeContainer </span>
         <p>
-          {!signedIn && <Link to="/login">Login</Link>}
+          {!signedIn && (
+            <React.Fragment>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </React.Fragment>
+          )}
           {signedIn && <span>Welcome, {authedUser.user.first_name}</span>}
         </p>
         <div className="mt-3 mb-5">
