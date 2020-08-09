@@ -17,7 +17,7 @@ const getProjectSuccess = (projectData): {} => {
   };
 };
 
-export const getProjectFailure = (errorMessage): {} => ({
+const getProjectFailure = (errorMessage): {} => ({
   type: GET_PROJECT_FAILURE,
   payload: {
     errorMessage,

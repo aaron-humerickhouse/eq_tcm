@@ -18,14 +18,14 @@ const getPermissionsSuccess = (permissionsData): {} => ({
   },
 });
 
-export const getPermissionsFailure = (errorMessage): {} => ({
+const getPermissionsFailure = (errorMessage): {} => ({
   type: GET_PERMISSIONS_FAILURE,
   payload: {
     errorMessage,
   },
 });
 
-const getPermissions = (userId): ((dispatch) => void) => {
+export const getPermissions = (userId): ((dispatch) => void) => {
   return (dispatch): void => {
     dispatch(getPermissionsStarted());
     new PermissionService()
@@ -43,18 +43,18 @@ export const LOGIN_STARTED = 'LOGIN_STARTED';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-export const loginStarted = (): {} => ({
+const loginStarted = (): {} => ({
   type: LOGIN_STARTED,
 });
 
-export const loginSuccess = (loginData): {} => ({
+const loginSuccess = (loginData): {} => ({
   type: LOGIN_SUCCESS,
   payload: {
     ...loginData,
   },
 });
 
-export const loginFailure = (errorMessage): {} => ({
+const loginFailure = (errorMessage): {} => ({
   type: LOGIN_FAILURE,
   payload: {
     errorMessage,
@@ -81,15 +81,15 @@ export const LOGOUT_STARTED = 'LOGOUT_STARTED';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
-export const logoutStarted = (): {} => ({
+const logoutStarted = (): {} => ({
   type: LOGOUT_STARTED,
 });
 
-export const logoutSuccess = (): {} => ({
+const logoutSuccess = (): {} => ({
   type: LOGOUT_SUCCESS,
 });
 
-export const logoutFailure = (errorMessage): {} => ({
+const logoutFailure = (errorMessage): {} => ({
   type: LOGOUT_FAILURE,
   payload: {
     errorMessage,
@@ -117,18 +117,18 @@ export const ASSIGN_AUTHED_USER_STARTED = 'ASSIGN_AUTHED_USER_STARTED';
 export const ASSIGN_AUTHED_USER_SUCCESS = 'ASSIGN_AUTHED_USER_SUCCESS';
 export const ASSIGN_AUTHED_USER_FAILURE = 'ASSIGN_AUTHED_USER_FAILURE';
 
-export const assignAuthedUserStarted = (): {} => ({
+const assignAuthedUserStarted = (): {} => ({
   type: ASSIGN_AUTHED_USER_STARTED,
 });
 
-export const assignAuthedUserSuccess = (loginData): {} => ({
+const assignAuthedUserSuccess = (loginData): {} => ({
   type: ASSIGN_AUTHED_USER_SUCCESS,
   payload: {
     ...loginData,
   },
 });
 
-export const assignAuthedUserFailure = (errorMessage): {} => ({
+const assignAuthedUserFailure = (errorMessage): {} => ({
   type: ASSIGN_AUTHED_USER_FAILURE,
   payload: {
     errorMessage,

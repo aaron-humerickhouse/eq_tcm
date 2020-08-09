@@ -14,6 +14,7 @@ class HomePage extends React.Component<Props> {
   componentDidMount(): void {
     const { history, route } = this.props;
 
+    // I don't remember why I did this
     if (!!route) {
       history.push(`/${route}`);
     }

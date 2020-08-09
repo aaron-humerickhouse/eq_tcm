@@ -20,7 +20,7 @@ const getProjectsSuccess = (projectsData): {} => {
   };
 };
 
-export const getProjectsFailure = (errorMessage): {} => ({
+const getProjectsFailure = (errorMessage): {} => ({
   type: GET_PROJECTS_FAILURE,
   payload: {
     errorMessage,

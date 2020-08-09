@@ -3,6 +3,8 @@
 module Users
   # Users::RegistrationsController
   class RegistrationsController < Devise::RegistrationsController
+    skip_before_action :authenticate_user, only: :create
+
     def create
       @user = User.new(user_params)
       if @user.save

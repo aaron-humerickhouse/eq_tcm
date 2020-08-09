@@ -6,10 +6,12 @@ import Button from 'react-bootstrap/Button';
 import PersonalInfoFormFieldsComponent from '../components/register/PersonalInfoFormFieldsComponent';
 import Col from 'react-bootstrap/cjs/Col';
 import Row from 'react-bootstrap/cjs/Row';
+import { registerUser } from '../actions/user';
 
 interface Props extends RouteComponentProps {
   user: any;
   signedIn: boolean;
+  dispatch: any;
 }
 
 interface State {
@@ -39,6 +41,20 @@ class RegisterPage extends React.Component<Props, State> {
     this.setState({ [key]: value });
   };
 
+  submitForm = () => {
+    const { firstName, lastName, email, password } = this.state;
+    const { dispatch } = this.props;
+
+    dispatch(
+      registerUser({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      }),
+    );
+  }
+
   render(): React.ReactNode {
     const { user, signedIn } = this.props;
 
@@ -51,7 +67,7 @@ class RegisterPage extends React.Component<Props, State> {
             <Col lg={6}>
               <Form>
                 <PersonalInfoFormFieldsComponent handleFieldChange={this.handleFieldChange} />
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" onClick={this.submitForm}>
                   Submit
                 </Button>
               </Form>
