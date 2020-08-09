@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
-import ProjectsComponent from './ProjectsComponent';
+import ProjectsComponent from '../components/home/ProjectsComponent';
 
 interface Props extends RouteComponentProps {
   route: string;
@@ -29,7 +29,10 @@ class HomePage extends React.Component<Props> {
           {!signedIn && (
             <React.Fragment>
               <Link to="/login">Login</Link>
+              <br />
               <Link to="/register">Register</Link>
+              <br />
+              <Link to="/sign_up">Sign Up</Link>
             </React.Fragment>
           )}
           {signedIn && <span>Welcome, {authedUser.user.first_name}</span>}

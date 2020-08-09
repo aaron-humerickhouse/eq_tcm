@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { logout } from '../../actions/authedUser';
+import { logout } from '../actions/authedUser';
 
 interface Props {
   signedIn: boolean;

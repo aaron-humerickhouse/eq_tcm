@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import LoginPage from './login/LoginPage';
-import LogoutPage from './logout/LogoutPage';
-import HomePage from './home/HomePage';
+import LoginPage from '../pages/LoginPage';
+import LogoutPage from '../pages/LogoutPage';
+import HomePage from '../pages/HomePage';
 import HeaderComponent from './HeaderComponent';
 import { Provider } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import { ConnectedRouter } from 'connected-react-router';
 import configureStore, { history } from './../configure-store';
-import NotFoundPage from './not-found/NotFoundPage';
+import NotFoundPage from '../pages/NotFoundPage';
 import Cookies from 'js-cookie';
-import ProjectPage from './projects/ProjectPage';
-import RegisterPage from './register/RegisterPage';
+import ProjectPage from '../pages/ProjectPage';
+import RegisterPage from '../pages/RegisterPage';
+import SignUpPage from "../pages/SignUpPage";
 // import {UserService} from "../services/user";
 
 interface Props {
@@ -34,6 +35,7 @@ class App extends React.Component<Props> {
                 <Route exact path="/logout" component={LogoutPage} />
                 <Route exact path="/projects/:id" component={ProjectPage} />
                 <Route exact path="/register" component={RegisterPage} />
+                <Route exact path="/sign_up" component={SignUpPage} />
                 <Route exact path="/404" component={NotFoundPage} />
                 <Redirect from="*" to="/404" />
               </Switch>

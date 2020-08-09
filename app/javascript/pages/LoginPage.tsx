@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { login } from '../../actions/authedUser';
+import { login } from '../actions/authedUser';
 import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';

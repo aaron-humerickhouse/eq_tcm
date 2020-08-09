@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getProject } from '../../actions/project';
+import { getProject } from '../actions/project';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 
