@@ -9,16 +9,18 @@ interface Props extends RouteComponentProps {
 }
 
 class CompanyInfoFormFieldsComponent extends React.Component<Props> {
-  handleCompanyChange: (event) => void = event => {
-    this.props.handleFieldChange('companyName', event.target.value);
-  };
-
   render(): React.ReactNode {
+    const { handleFieldChange } = this.props;
+
     return (
       <React.Fragment>
         <Form.Group controlId="formCompany">
           <Form.Label>Company</Form.Label>
-          <Form.Control type="text" placeholder="Enter company" onChange={this.handleCompanyChange} />
+          <Form.Control
+            type="text"
+            placeholder="Enter company"
+            onChange={e => handleFieldChange('companyName', e.target.value)}
+          />
         </Form.Group>
         <Form.Group controlId="formLogo">
           <Form.Label>Logo</Form.Label>

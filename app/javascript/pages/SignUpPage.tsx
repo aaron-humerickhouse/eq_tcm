@@ -21,6 +21,7 @@ interface State {
   companyName: string;
 }
 
+// For signing up and creating a company and becoming the admin for it
 class SignUpPage extends React.Component<Props, State> {
   constructor(props) {
     super(props);
