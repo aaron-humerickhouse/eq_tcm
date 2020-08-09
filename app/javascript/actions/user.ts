@@ -12,7 +12,7 @@ const registeredUserSuccess = (userData: any): any => {
   return {
     type: REGISTER_USER_SUCCESS,
     payload: {
-      ...userData,
+      user: userData,
     },
   };
 };

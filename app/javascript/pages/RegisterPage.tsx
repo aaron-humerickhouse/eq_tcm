@@ -67,7 +67,7 @@ class RegisterPage extends React.Component<Props, State> {
             <Col lg={6}>
               <Form>
                 <PersonalInfoFormFieldsComponent handleFieldChange={this.handleFieldChange} />
-                <Button variant="primary" type="submit" onClick={this.submitForm}>
+                <Button variant="primary" type="button" onClick={this.submitForm}>
                   Submit
                 </Button>
               </Form>
