@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import InputGroup from "react-bootstrap/InputGroup";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import InputGroup from 'react-bootstrap/InputGroup';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 interface Props extends RouteComponentProps {
   user: any;
@@ -29,35 +29,36 @@ class PersonalInfoFormFieldsComponent extends React.Component<Props, State> {
   toggleShow: () => void = () => {
     this.setState({ hidePassword: !this.state.hidePassword });
   };
-  handleFirstNameChange: (event) => void = event => {
-    this.props.handleFieldChange('firstName', event.target.value);
-  };
-  handleLastNameChange: (event) => void = event => {
-    this.props.handleFieldChange('lastName', event.target.value);
-  };
-  handleEmailChange: (event) => void = event => {
-    this.props.handleFieldChange('email', event.target.value);
-  };
-  handlePasswordChange: (event) => void = event => {
-    this.props.handleFieldChange('password', event.target.value);
-  };
 
   render(): React.ReactNode {
     const { hidePassword } = this.state;
+    const { handleFieldChange } = this.props;
 
     return (
       <React.Fragment>
         <Form.Group controlId="formFirstName">
           <Form.Label>First Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter first name" onChange={this.handleFirstNameChange} />
+          <Form.Control
+            type="text"
+            placeholder="Enter first name"
+            onChange={e => handleFieldChange('firstName', e.target.value)}
+          />
         </Form.Group>
         <Form.Group controlId="formLastName">
           <Form.Label>Last Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter last name" onChange={this.handleLastNameChange} />
+          <Form.Control
+            type="text"
+            placeholder="Enter last name"
+            onChange={e => handleFieldChange('lastName', e.target.value)}
+          />
         </Form.Group>
         <Form.Group controlId="formEmail">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" onChange={this.handleEmailChange} />
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            onChange={e => handleFieldChange('email', e.target.value)}
+          />
           <Form.Text className="text-muted">We&apos;ll never share your email with anyone else.</Form.Text>
         </Form.Group>
         <Form.Group controlId="formPassword">
@@ -66,7 +67,7 @@ class PersonalInfoFormFieldsComponent extends React.Component<Props, State> {
             <Form.Control
               type={hidePassword ? 'password' : 'text'}
               placeholder="Password"
-              onChange={this.handlePasswordChange}
+              onChange={e => handleFieldChange('password', e.target.value)}
             />
             <InputGroup.Append>
               <InputGroup.Text>
@@ -88,6 +89,3 @@ function mapStateToProps({ authedUser }): object {
 }
 
 export default connect(mapStateToProps)(PersonalInfoFormFieldsComponent);
-
-
-

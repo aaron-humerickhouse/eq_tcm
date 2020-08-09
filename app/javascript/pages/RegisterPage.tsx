@@ -22,6 +22,7 @@ interface State {
   password: string;
 }
 
+// For registering with an invite
 class RegisterPage extends React.Component<Props, State> {
   constructor(props) {
     super(props);
@@ -53,7 +54,7 @@ class RegisterPage extends React.Component<Props, State> {
         password: password,
       }),
     );
-  }
+  };
 
   render(): React.ReactNode {
     const { user, signedIn } = this.props;
